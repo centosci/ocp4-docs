@@ -4,8 +4,8 @@
 
 |Steps||
 |---|---|
-|1|[Prerequisites](/sops/installation/prerequisites.md)|
-|2|[Bare Metal Install](/sops/installation/install.md)|
-|3|[Local Storage](/sops/installation/localstorage.md)|
-|4|[Persistant Storage](/sops/installation/persistant_storage_nfs.md)|
-|5|[Verification](/sops/installation/verification.md)|
+|1|[Prerequisites](prerequisites.md)|
+|2|[Bare Metal Install](install.md)|
+|3|[Local Storage](localstorage.md)|
+|4|[Persistant Storage](persistant_storage_nfs.md)|
+|5|[Verification](verification.md)|
