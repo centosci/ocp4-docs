@@ -10,4 +10,4 @@ End result: console.apps.ci.centos.org is pointed to OCP 4.x cluster and we have
 |Steps||
 |---|---|
 |1|[sops](/sops/README.md)|
-|1|[spikes](/spikes/README.md)|
+|2|[spikes](/spikes/README.md)|
