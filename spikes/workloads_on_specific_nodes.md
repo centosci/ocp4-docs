@@ -8,7 +8,7 @@ Resources:
 *   [2] Pod placing using node affinity rules [https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-node-affinity.html](https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-node-affinity.html)
 *   [3] Pod placing using node taints, and pod tolerations [https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-taints-tolerations.html](https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-taints-tolerations.html)
 *   [4] Pod affinity/anti-affinity [https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-pod-affinity.html#nodes-scheduler-pod-affinity](https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-pod-affinity.html#nodes-scheduler-pod-affinity)
-   
+*   [5] Cluster/Project wide Node Affinity [https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-node-selectors.html#nodes-scheduler-node-selectors-project_nodes-scheduler-node-selectors](https://docs.openshift.com/container-platform/4.4/nodes/scheduling/nodes-scheduler-node-selectors.html#nodes-scheduler-node-selectors-project_nodes-scheduler-node-selectors)
 *   [6] Cluster [https://github.com/storageos/cluster-operator](https://github.com/storageos/cluster-operator)
 
 
