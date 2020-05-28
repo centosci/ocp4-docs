@@ -9,3 +9,4 @@
 |3|[Replacing Certs](replacing_certs.md)|
 |4|[Upgrades](upgrades.md)|
 |5|[Adding Nodes](adding_nodes.md)|
+|6|[Adding Admin Users](adding_admin_users.md)|
