@@ -90,6 +90,7 @@ spec:
         path: /etc/NetworkManager/conf.d/disabledhcp.conf
   osImageURL: ""
 EOF
+done
 ```
 
 *   *NOTE* There is a gotcha here, fs mode is **octal** and should start with 0 eg 0644 (-rwxr--r--), however it will be **decimal** value 420 when queried later via kubernetes api.
@@ -131,7 +132,18 @@ INFO Consuming Openshift Manifests from target directory
 *   Existing CentOS PXE boot configuration Ansible [example](https://github.com/CentOS/ansible-infra-playbooks/blob/master/templates/pxeboot.j2)
 *   Example RHCOS PXE boot configuration [here](https://projects.engineering.redhat.com/secure/attachment/104734/centos-ci-pxe_sampleconfig.txt)
 *   **1.1.10. Once the systems are booting and installing, you can monitor the installation with: `./openshift-install --dir=/home/dkirwan/ocp-ci-centos-org wait-for bootstrap-complete --log-level=info`
-*   1.1.11. Logging in to the cluster. At this point the cluster is up and we’re in configuration territory.
+*   Once the master nodes come up successfully, this command will exit. We can now remove the bootstrap instance, and repurpose it as a worker/compute node.
+*   Run the haproxy role, once the bootstrap node has been removed from the `ocp-ci-master-and-bootstrap-stg` ansible inventory group.
+*   Begin installing the compute/worker nodes.
+*   Once the workers are up accept them into the cluster by accepting their `csr` certs:
+```
+# List the certs. If you see status pending, this is the worker/compute nodes attempting to join the cluster. It must be approved.
+oc get csr
+
+# Accept all node CSRs one liner
+oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
+```
+*   1.1.11. Logging in to the cluster. At this point the cluster is up, and we’re in configuration territory.
 
 
 ## Manually test the bootstrap process RHCOS
