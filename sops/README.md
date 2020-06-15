@@ -10,3 +10,4 @@
 |4|[Upgrades](upgrades.md)|
 |5|[Adding Nodes](adding_nodes.md)|
 |6|[Adding Admin Users](adding_admin_users.md)|
+|7|[Configuring the Internal Image Registry](configuring_image_registry.md)|
