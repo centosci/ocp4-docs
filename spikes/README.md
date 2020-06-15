@@ -4,4 +4,5 @@
 
 |Steps|Spikes|
 |---|---|
-|1|[workloads on specific nodes](workloads_on_specific_nodes.md)|
+|1|[Workloads on specific nodes](workloads_on_specific_nodes.md)|
+|2|[Configure default permissions for ACO users](configuring_default_aco_user_permissions.md)|
