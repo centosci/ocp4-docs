@@ -11,3 +11,5 @@
 |5|[Adding Nodes](adding_nodes.md)|
 |6|[Adding Admin Users](adding_admin_users.md)|
 |7|[Configuring the Internal Image Registry](configuring_image_registry.md)|
+|8|[Authenticating with the OCP cluster via the command line oc utility](authenticating_via_cli.md)|
+|9|[Add an OpenID identity provider to the cluster](adding_oidc_authentication.md)|

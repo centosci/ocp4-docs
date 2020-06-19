@@ -1,5 +1,16 @@
 # Lets Encrypt Certs
-Need a valid cert for both the wildcard *.apps.ocp.ci.centos.org and api.ocp.ci.centos.org
+We need a valid cert for both the wildcard \*.apps.ocp.ci.centos.org and api.ocp.ci.centos.org. We have a role/task which covers the replacing of TLS certs on ocp.ci/ocp.stg.ci `https://github.com/CentOS/ansible-role-ocp-admin-node/blob/master/tasks/tls.yml`.
+
+A separate process is performed to request certs from LetsEncrypt, and stores the cacert/certs/key within the pkistore for ocp.ci/ocp.stg.ci.
+
+To deploy the certs to the cluster, we run the following playbook: `https://github.com/CentOS/ansible-infra-playbooks/blob/master/role-ocp-admin-node.yml`.
+
+eg:
+
+```
+ansible-playbook playbooks/role-ocp-admin-node.yml --tags "tls, certs"
+```
+
 
 Resources:
 *   [1] Certman Operator (looks like this requires HIVE[5] so not going to work) [https://github.com/openshift/certman-operator](https://github.com/openshift/certman-operator)
