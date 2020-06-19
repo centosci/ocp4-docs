@@ -43,7 +43,12 @@ local-pv-f9d2a890   223Gi  	RWO        	Delete       	Available       	local-sc 
 ```
 
 *   RWO is ReadWriteOnce, which means you can only attach the volume to a single pod. Thats not what we want here, we want to be able to attach the volume to many pods potentially see [6].
-*   I edited each pv one at a time, and changed the access from ReadWriteOnce to ReadWriteMany
+*   Rather than editing each pv one at a time, and changing the access from ReadWriteOnce to ReadWriteMany instead run the following which should handle the task automatically:
+
+```
+for i in $(oc get pv --selector storage.openshift.com/local-volume-owner-namespace=local-storage -o custom-columns="name:.metadata.name" | tail -n +$((2))); do oc patch pv $i --patch '{"spec":{"accessModes":["ReadWriteMany"]}}';done
+```
+
 
 ```
 oc get pv

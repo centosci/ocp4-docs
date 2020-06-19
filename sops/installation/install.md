@@ -7,6 +7,35 @@ Documentation: [docs](https://access.redhat.com/documentation/en-us/openshift_co
 * cd ocp-ci-centos-org
 * For installations of OpenShift Container Platform that use user-provisioned infrastructure, you must manually generate your installation configuration file.
 * 1.1.7.1. for sample config see: [here](https://projects.engineering.redhat.com/secure/attachment/104626/install-config.yaml.bak)
+
+```
+apiVersion: v1
+baseDomain: centos.org
+compute:                                                                                                                                                                                                                                      
+- hyperthreading: Enabled
+  name: worker
+  replicas: 0
+controlPlane:
+  hyperthreading: Enabled
+  name: master
+  replicas: 3
+metadata:
+  name: ocp.ci
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  networkType: OpenShiftSDN
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  none: {}
+fips: false
+pullSecret: '<installation pull secret from cloud.redhat.com>'
+sshKey: '<ssh key for the RHCOS nodes>'
+```
+
+
 *   get the **pullsecret** from [https://cloud.redhat.com/openshift/install/metal/user-provisioned](https://cloud.redhat.com/openshift/install/metal/user-provisioned) requires your access.redhat.com login.
 *   “You must set the value of the replicas parameter to 0. This parameter controls the number of workers that the cluster creates and manages for you, which are functions that the cluster does not perform when you use user-provisioned infrastructure. You must manually deploy worker machines for the cluster to use before you finish installing OpenShift Container Platform.”
 *   **1.1.8**. Once the **install-config.yaml** configuration has been added correctly, take a backup of this file for future installs or reference as the next step will consume it. Then run the following:
@@ -61,9 +90,8 @@ Documentation: [docs](https://access.redhat.com/documentation/en-us/openshift_co
 *   Create the machineconfigs to disable dhcp on the master/worker nodes: 
 
 ```
-for variant in master worker; do
+for variant in master worker; do 
 cat << EOF > ./99_openshift-machineconfig_99-${variant}-nm-nodhcp.yaml
-
 apiVersion: machineconfiguration.openshift.io/v1
 kind: MachineConfig
 metadata:
@@ -83,7 +111,7 @@ spec:
     storage:
       files:
       - contents:
-          Source: data:text/plain;charset=utf-8;base64,W21haW5dCm5vLWF1dG8tZGVmYXVsdD0qCg==
+          source: data:text/plain;charset=utf-8;base64,W21haW5dCm5vLWF1dG8tZGVmYXVsdD0qCg==
           verification: {}
         filesystem: root
         mode: 0644
@@ -95,6 +123,7 @@ done
 
 *   *NOTE* There is a gotcha here, fs mode is **octal** and should start with 0 eg 0644 (-rwxr--r--), however it will be **decimal** value 420 when queried later via kubernetes api.
 *   Create the ignition configurations:
+*   Rename `worker.ign` to `compute.ign`, as later steps in the process are configured to point at compute.ign.
 
 ```
 openshift-install create ignition-configs --dir=/home/dkirwan/ocp-ci-centos-org
@@ -112,8 +141,18 @@ INFO Consuming Openshift Manifests from target directory
 ├── bootstrap.ign
 ├── master.ign
 ├── metadata.json
-└── worker.ign
+└── compute.ign
 ```
+
+
+*   *NOTE* for production ie `ocp.ci` we must perform an extra step at this point, as the machines have 2 hard disks attached. We want to ensure that `/dev/sdb` gets its partition table wiped at bootstrapping time, so at a later time we can configure the Local Storage Operator to manage this disk drive.
+*   Modify the `master.ign` and `compute.ign` ignition files with the following:
+
+```
++   "storage":{"disks":[{"device":"/dev/sdb","wipeTable":true}]},
+-   "storage":{},
+```
+
 
 *   **1.1.9. Creating Red Hat Enterprise Linux CoreOS (RHCOS) machines**
 *   Prerequisites: 

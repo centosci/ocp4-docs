@@ -1,12 +1,13 @@
 # Persistent storage via NFS
+Once the NFS storage is configured and available for use within the cluster, we can create PVs with the following adhoc playbook: [ansible-infra-playbooks/adhoc-openshift-pv.yml](https://github.com/CentOS/ansible-infra-playbooks/blob/master/adhoc-openshift-pv.yml)
+
+Sample usage:
 
 ```
-14:29 <Arrfab> Saffronique: you have storage normally :
-14:29 <Arrfab> showmount -e nfs02.ci.centos.org|grep ocp
-14:30 <Arrfab>  /exports/ocp-prod  172.19.0.140,172.19.0.139,172.19.0.138,172.19.0.137,172.19.0.136,172.19.0.135,172.19.0.134
-
-You can so use the following nfs path : nfs02.ci.centos.org:/exports/ocp-prod
+ansible-playbook playbooks/adhoc-openshift-pv.yml -e "host=<admin host where the NFS storage is mounted>" -e "pv_size=10Gi" -e "cico_project_name=project-pv-name" 
 ```
+
+
 
 Resources:
 *   [1] Jira [https://projects.engineering.redhat.com/browse/CPE-701](https://projects.engineering.redhat.com/browse/CPE-701)
