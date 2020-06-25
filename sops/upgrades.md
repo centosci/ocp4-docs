@@ -3,14 +3,20 @@
 ## Announcing maintenance/version upgrades
 There is currently no formal process for announcing maintenance/upgrades for the Centos CI Openshift 4 infrastructure. Until this gets fleshed out fully, proceed with the following process. Openshift 4 upgrades aim to be seamless and non service affecting, end users should hopefully suffer nothing more than temporary slowness in cluster responsiveness.
 
+- Roll updates out to staging first. Roll updates out to production a day or two later, if everything is still working as expected.
 - Announce via email list: `ci-users@centos.org`, and via IRC: `centos-ci@freenode` that a maintenance period or upgrade will be taking place and when.
 - Ensure that the time allotted for maintenance/upgrade is adequate to complete with some leeway for encountering issues. eg 2 hours
 - Once complete, or if the maintenance/upgrade is cancelled, inform via email list `ci-users@centos.org`, and via IRC on `centos-ci@freenode` once more.
 
 ## Steps
-* Login with Admin access account and go in `Administration` section, then `Cluster Settings`
-* Select Update now (visible if an update is available) and select the version you want to update your cluster to
-* Click update now
+* Silence alerting to prevent oncall engineers getting pinged when services/nodes restart during the upgrade.
+* Login with Admin access account and go in `Administration` section, then `Cluster Settings`.
+* Select Update now (visible if an update is available) and select the version you want to update your cluster to.
+* Click update now.
+* Keep an eye on the status of the upgrade to ensure it does not stall/fail half way through.
+* Perform suite of tests (functional/integration) to ensure the cluster is still working as expected.
+* Unsilence monitoring/alerting once the cluster has completed with the upgrade.
+
 
 
 Resources
