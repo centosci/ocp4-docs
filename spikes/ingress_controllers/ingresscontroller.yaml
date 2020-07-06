@@ -1,0 +1,14 @@
+apiVersion: operator.openshift.io/v1
+kind: IngressController
+metadata:
+  name: cpe-764-spike
+  namespace: openshift-ingress-operator
+spec:
+  domain: apps.ci.centos.org
+  endpointPublishingStrategy:
+    type: HostNetwork
+  routeSelector:
+    matchLabels:
+      type: sharded
+status: {}
+
