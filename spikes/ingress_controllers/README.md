@@ -16,7 +16,6 @@ Performed the following steps to achieve goal:
 -rw-rw-r--. 1 dkirwan dkirwan  336 Jul  6 17:53 route.yaml
 -rw-rw-r--. 1 dkirwan dkirwan  273 Jul  6 17:58 service.yaml
 ```
-
 - Created an `IngressController` which creates 2 router replicas and configured to manage Routes which point at `*.apps.ci.centos.org`. It also has a `routeSelector` to match labels `type: sharded`
 ```
   routeSelector:
@@ -51,13 +50,11 @@ console-openshift-console.apps.ocp.stg.ci.centos.org. 600 IN A 8.43.84.237
 ```
 - Configured my `/etc/hosts` file accordingly:
 ```
- cat /etc/hosts
+cat /etc/hosts
 127.0.0.1   localhost localhost.localdomain localhost4 localhost4.localdomain4
 ::1         localhost localhost.localdomain localhost6 localhost6.localdomain6
 8.43.84.237 ingress-controller-test.apps.ci.centos.org
 ```
 - Visited `http://ingress-controller-test.apps.ci.centos.org` and was greeted with the expected content in the deployed app.
 - We should be able to achieve this spike CPE-764 using the Ingress Controller Operator.
-
-
 
