@@ -21,3 +21,4 @@ There is currently no formal process for announcing maintenance/upgrades for the
 
 Resources
 *   [1] [https://docs.openshift.com/container-platform/4.4/updating/updating-cluster-cli.html](https://docs.openshift.com/container-platform/4.4/updating/updating-cluster-cli.html)
+*   [2] []
