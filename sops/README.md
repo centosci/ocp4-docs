@@ -14,3 +14,4 @@
 |8|[Authenticating with the OCP cluster via the command line oc utility](authenticating_via_cli.md)|
 |9|[Add an OpenID identity provider to the cluster](adding_oidc_authentication.md)|
 |9|[Disabling the self-provisioners role](disabling_self_provisioner_role.md)|
+|10|[Adding taints to a node](adding_taints_to_nodes.md)|
