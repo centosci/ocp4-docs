@@ -1,4 +1,4 @@
-<h1>CentOS CI Infrastructure - OpenShift cluster upgrade</h1>
+<h1>CentOS CI Infrastructure - Docs</h1>
 
 # Introduction
 This doc is intended to document the processes of upgrading the openshift cluster. It is an initiative of the CentOS CI Infrastructure team in CPE. \
