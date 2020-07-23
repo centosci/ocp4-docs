@@ -74,7 +74,7 @@ system:admin
 
 eg:
 
-````
+```
 echo "q" | openssl s_client -connect api-int.ocp.ci.centos.org:22623  -showcerts | awk '/-----BEGIN CERTIFICATE-----/,/-----END CERTIFICATE-----/' | base64 --wrap=0
 DONE
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXCERTSTOREDASABASE64ENCODEDSTRING=
