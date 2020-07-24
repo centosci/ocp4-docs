@@ -96,7 +96,18 @@ ansible-playbook playbooks/adhoc-provision-ocp4-node.yml
 [WARNING] Nodes to be fully wiped/reinstalled with OCP => : newnode6.example.centos.org
 ```
 
-9. Finally run the playbook to update haproxy config to monitor the new nodes.
+9. As the new nodes are provisioned, they will attempt to join the cluster. They must first be accepted.
+
+```
+# List the certs. If you see status pending, this is the worker/compute nodes attempting to join the cluster. It must be approved.
+oc get csr
+
+# Accept all node CSRs one liner
+oc get csr -o go-template='{{range .items}}{{if not .status}}{{.metadata.name}}{{"\n"}}{{end}}{{end}}' | xargs oc adm certificate approve
+```
+
+
+10. Finally run the playbook to update haproxy config to monitor the new nodes.
 
 ```
 ansible-playbook playbooks/role-haproxy.yml --tags="config"
