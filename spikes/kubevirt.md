@@ -2,7 +2,6 @@
 
 `Note: This doc is full of snippets of official doc in order to keep it to point. This is not to be considered a documentation/guide for others. Please refer official guide. This is mere a note for CentOS CI admins based on our workflow`
 
-
 ## How to install Kubevirt in cluster
 
 * Open a browser window and log in to the OpenShift Container Platform web console.
