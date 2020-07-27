@@ -11,8 +11,9 @@ There is currently no formal process for announcing maintenance/upgrades for the
 ## Steps
 * Silence alerting to prevent oncall engineers getting pinged when services/nodes restart during the upgrade.
 * Login with Admin access account and go in `Administration` section, then `Cluster Settings`.
-* Select Update now (visible if an update is available) and select the version you want to update your cluster to.
-* Click update now.
+* Ensure that the channel is set to `stable-major.minor` and that the `Update now` button is visible.
+* If you are updating to a new minor version, you must first update the channel to `fast-major.minor` version which matches the minor version you wish to update to. Follow the latest information on [2] for updating between minor/major versions, as there might be information such as backing up important resources prior to an update.
+* Now click update now, and choose the latest `major.minor.patch` version.
 * Keep an eye on the status of the upgrade to ensure it does not stall/fail half way through.
 * Perform suite of tests (functional/integration) to ensure the cluster is still working as expected.
 * Unsilence monitoring/alerting once the cluster has completed with the upgrade.
@@ -21,4 +22,4 @@ There is currently no formal process for announcing maintenance/upgrades for the
 
 Resources
 *   [1] [https://docs.openshift.com/container-platform/4.4/updating/updating-cluster-cli.html](https://docs.openshift.com/container-platform/4.4/updating/updating-cluster-cli.html)
-*   [2] []
+*   [2] [https://docs.openshift.com/container-platform/4.5/updating/updating-cluster-between-minor.html](https://docs.openshift.com/container-platform/4.5/updating/updating-cluster-between-minor.html)
