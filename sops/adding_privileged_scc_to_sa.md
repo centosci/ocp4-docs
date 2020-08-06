@@ -9,7 +9,7 @@ This SOP should be used in the following scenario:
 1. Add the `prvileged` security context constraint to the service account in the tenants namespace like so:
 
 ```
-oc adm policy add-scc-to-user privileged -z myserviceaccount
+oc adm policy add-scc-to-user privileged -n namespace -z myserviceaccount
 ```
 
 
