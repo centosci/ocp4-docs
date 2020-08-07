@@ -27,26 +27,27 @@ Note: This is only applicable for already existing projects in other places. New
 ## Setting up your jobs in cico-workspace jenkins
 Configuring your jobs should be similar to your older configuration. You can either have your jobs written in trigger jobs -> groovy dialogue box, or source it from your repo (we recommend the later for easy management of jenkinsfile). One thing to point, in groovy, the node parameter type defines where the target job should be executed, the value must match either a label or a node name - otherwise the job will just stay in the queue.
 We have a custom label called `cico-workspace` that has python-cicoclient installed in it so that you can request duffy nodes. This workspace will also have your duffy-api-key exported so that you can directly request nodes from duffy. Here is an example of jenkins file
+
 ```
 node('cico-workspace') {
     stage('get cico node') {
-		node = sh(script: "cico node get --release=8", returnStdout: true).trim().tokenize(' ')
+		node = sh(script: "cico --debug node get -f value -c hostname -c comment", returnStdout: true).trim().tokenize(' ')
 		env.node_hostname = "${node[0]}.ci.centos.org"
 		env.node_ssid = "${node[1]}"
 	}
-
+	
     stage('tests-example') {
-        pass
+         println("Put your tests here")
+         println("example running a test on ${node_hostname} ${node_ssid}")
     }
 
     stage('builds-example') {
-        pass
+        println("Put your builds here")
+         println("example running a build on ${node_hostname} ${node_ssid}")
     }
 
-    finally {
-        stage('return cico node') {
-			sh 'cico node done ${node_ssid}'
-        }
+    stage('return cico node') {
+		sh 'cico node done ${node_ssid} > commandResult'
     }
 }
 ```
