@@ -39,6 +39,31 @@ Subjects:
   ----  ----  ---------
 ```
 
+When the cluster is updated to a new version, unless we mark the role appropriately, the permissions will be restored after the update is complete.
+
+Verify that the value is currently set to be restored after an update:
+
+```
+oc get clusterrolebinding.rbac self-provisioners -o yaml
+```
+
+```
+apiVersion: authorization.openshift.io/v1
+kind: ClusterRoleBinding
+metadata:
+  annotations:
+    rbac.authorization.kubernetes.io/autoupdate: "true"
+  ...
+```
+
+We wish to set this `rbac.authorization.kubernetes.io/autoupdate` to `false`. To patch this do the following.
+
+```
+oc patch clusterrolebinding.rbac self-provisioners -p '{ "metadata": { "annotations": { "rbac.authorization.kubernetes.io/autoupdate": "false" } } }'
+```
+
+
+
 ### Resources
 
 - [1] https://docs.openshift.com/container-platform/4.4/applications/projects/configuring-project-creation.html#disabling-project-self-provisioning_configuring-project-creation
