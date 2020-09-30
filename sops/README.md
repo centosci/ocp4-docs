@@ -19,3 +19,4 @@
 |13|[Cordoning nodes and draining pods](cordoning_nodes_and_draining_pods.md)|
 |14|[Graceful Cluster Shutdown](graceful_shutdown_ocp_cluster.md)|
 |15|[Creating etcd backup](create_etcd_backup.md)|
+|16|[Graceful Cluster Startup](graceful_startup_ocp_cluster.md)|
