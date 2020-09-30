@@ -68,3 +68,4 @@ kempty-n9.ci.centos.org    Ready    worker   106d   v1.18.3+6c42de8
 ### Resources
 
 - [1] [Graceful Cluster Startup](https://docs.openshift.com/container-platform/4.5/backup_and_restore/graceful-cluster-restart.html)
+- [2] [Cluster disaster recovery](https://docs.openshift.com/container-platform/4.5/backup_and_restore/disaster_recovery/scenario-2-restoring-cluster-state.html#dr-restoring-cluster-state)
