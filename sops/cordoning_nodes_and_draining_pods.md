@@ -24,7 +24,7 @@ NAME        STATUS                        ROLES     AGE       VERSION
 Note: It might not switch to `NotReady` immediately, there maybe many pods still running.
 
 
-3. Evacuate the Pods using one of the following methods
+3. Evacuate the Pods from **worker nodes** using one of the following methods
 This will drain node `<node1>`, delete any local data, and ignore daemonsets, and give a period of 60 seconds for pods to drain gracefully.
 
 ```
