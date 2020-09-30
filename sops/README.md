@@ -17,4 +17,5 @@
 |11|[Add an OpenID identity provider to the cluster](adding_oidc_authentication.md)|
 |12|[Disabling the self-provisioners role](disabling_self_provisioner_role.md)|
 |13|[Cordoning nodes and draining pods](cordoning_nodes_and_draining_pods.md)|
-
+|14|[Graceful Cluster Shutdown](graceful_shutdown_ocp_cluster.md)|
+|15|[Creating etcd backup](create_etcd_backup.md)|
