@@ -25,10 +25,10 @@ Note: It might not switch to `NotReady` immediately, there maybe many pods still
 
 
 3. Evacuate the Pods using one of the following methods
-This will drain node `<node1>`, delete any local data, and ignore daemonsets, and give a period of 30 minutes for pods to drain gracefully.
+This will drain node `<node1>`, delete any local data, and ignore daemonsets, and give a period of 60 seconds for pods to drain gracefully.
 
 ```
-oc adm drain <node1> --delete-local-data=true --ignore-daemonsets=true --grace-period=30
+oc adm drain <node1> --delete-local-data=true --ignore-daemonsets=true --grace-period=60
 ```
 
 4. Perform the scheduled maintenance on the node
