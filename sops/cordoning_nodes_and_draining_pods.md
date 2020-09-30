@@ -9,8 +9,11 @@ This SOP should be followed in the following scenarios:
 1. Mark the node as unschedulable:
 
 ```
-oc adm cordon <node1>
-node/<node1> cordoned
+nodes=$(oc get nodes -o name  | sed -E "s/node\///")
+echo $nodes
+
+for node in ${nodes[@]}; do oc adm cordon $node; done
+node/<node> cordoned
 ```
 
 2. Check that the node status is `NotReady,SchedulingDisabled`
@@ -39,7 +42,10 @@ Do what ever is required in the scheduled maintenance window
 We must uncordon the node. This allows it to be marked scheduleable once more.
 
 ```
-oc adm uncordon <node1>
+nodes=$(oc get nodes -o name  | sed -E "s/node\///")
+echo $nodes
+
+for node in ${nodes[@]}; do oc adm uncordon $node; done
 ```
 
 
