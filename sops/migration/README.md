@@ -9,19 +9,19 @@ See the following which explains how to open a ticket (Point 3)
 
 
 ## If your project is on ci.centos.org
-As you are using central jenkins deployment that's not private to you, your project might see some changes. You will have your own jenkins deployment to run all your jobs instead of having a shared jenkins instance where you don't have admin access. With the extra privilage in jenkins, you can add plugins, credentials as you need and a bunch of other abilities.
+As you are using central jenkins deployment that's not private to you, your project might see some changes. You will have your own jenkins deployment to run all your jobs instead of having a shared jenkins instance where you don't have admin access. With the extra privileges in jenkins, you can add plugins, credentials as you need and a bunch of other abilities.
 This also means there is no direct maintenance required from CentOS CI Infra admins as openshift takes care of things dying or crashing and anything in the jobs config, you can take care of them yourself (We will help you get started and are always in reach if you notice any hiccups that is not auto healed). You can have the same workflow or use this opportunity to change your freestyle jobs to pipelines but that's totally on you.
 See the following which explains how to open a ticket (Point 3)
 
 
-### open a project ticket
+### Open a project ticket
 
 Create a new ticket in [pagure.io/centos-infra/issues](https://pagure.io/centos-infra/issues) with type ci-migration
 template or [click here](https://pagure.io/centos-infra/new_issue?template=ci-migration).
 
 We will have your accounts created in 48 hours (if no doubts/followup needed).
 
-Note: This is only applicable for already existing projects in other places. New projects will have to go through a different process/evaluation and we may need more time (this is also applicable for projects requesting extra privilages than default admin level access to namespace).
+Note: This is only applicable for already existing projects in other places. New projects will have to go through a different process/evaluation and we may need more time (this is also applicable for projects requesting extra privileges than default admin level access to namespace).
 
 
 ## Setting up your jobs in cico-workspace jenkins
@@ -31,11 +31,11 @@ We have a custom label called `cico-workspace` that has python-cicoclient instal
 ```
 node('cico-workspace') {
     stage('get cico node') {
-		node = sh(script: "cico --debug node get -f value -c hostname -c comment", returnStdout: true).trim().tokenize(' ')
-		env.node_hostname = "${node[0]}.ci.centos.org"
-		env.node_ssid = "${node[1]}"
-	}
-	
+        node = sh(script: "cico --debug node get -f value -c hostname -c comment", returnStdout: true).trim().tokenize(' ')
+        env.node_hostname = "${node[0]}.ci.centos.org"
+        env.node_ssid = "${node[1]}"
+    }
+
     stage('tests-example') {
          println("Put your tests here")
          println("example running a test on ${node_hostname} ${node_ssid}")
@@ -47,8 +47,17 @@ node('cico-workspace') {
     }
 
     stage('return cico node') {
-		sh 'cico node done ${node_ssid} > commandResult'
+        sh 'cico node done ${node_ssid} > commandResult'
     }
 }
 ```
 
+## Configuring the Kubernetes concurrency limit (number of cloud executors)
+As the *standard* (static) Jenkins executors have been replaced by cloud-based ones, the limit is now configured in a different place.
+The configuration now resides under:
+
+Manage Jenkins -> Manage Nodes and Clouds -> Configure Clouds -> Kubernetes -> Kubernetes Cloud details... -> Concurrency Limit
+
+By default, the limit is set to 100, i.e. 100 parallel jobs at once. This default is in most scenarios way too high and can cause a quick
+Duffy pool depletion (if the spawned pods use the Duffy nodes). So, to be a good netizen, it is recommended to set this number to some
+sensible value (like 15 or 20, etc. - depends on your project), just to take in consideration the other users of the Duffy nodes & Kubernetes cluster.
