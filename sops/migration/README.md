@@ -9,19 +9,19 @@ See the following which explains how to open a ticket (Point 3)
 
 
 ## If your project is on ci.centos.org
-As you are using central jenkins deployment that's not private to you, your project might see some changes. You will have your own jenkins deployment to run all your jobs instead of having a shared jenkins instance where you don't have admin access. With the extra privilage in jenkins, you can add plugins, credentials as you need and a bunch of other abilities.
+As you are using central jenkins deployment that's not private to you, your project might see some changes. You will have your own jenkins deployment to run all your jobs instead of having a shared jenkins instance where you don't have admin access. With the extra privileges in jenkins, you can add plugins, credentials as you need and a bunch of other abilities.
 This also means there is no direct maintenance required from CentOS CI Infra admins as openshift takes care of things dying or crashing and anything in the jobs config, you can take care of them yourself (We will help you get started and are always in reach if you notice any hiccups that is not auto healed). You can have the same workflow or use this opportunity to change your freestyle jobs to pipelines but that's totally on you.
 See the following which explains how to open a ticket (Point 3)
 
 
-### open a project ticket
+### Open a project ticket
 
 Create a new ticket in [pagure.io/centos-infra/issues](https://pagure.io/centos-infra/issues) with type ci-migration
 template or [click here](https://pagure.io/centos-infra/new_issue?template=ci-migration).
 
 We will have your accounts created in 48 hours (if no doubts/followup needed).
 
-Note: This is only applicable for already existing projects in other places. New projects will have to go through a different process/evaluation and we may need more time (this is also applicable for projects requesting extra privilages than default admin level access to namespace).
+Note: This is only applicable for already existing projects in other places. New projects will have to go through a different process/evaluation and we may need more time (this is also applicable for projects requesting extra privileges than default admin level access to namespace).
 
 
 ## Setting up your jobs in cico-workspace jenkins
