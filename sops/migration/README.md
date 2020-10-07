@@ -52,3 +52,12 @@ node('cico-workspace') {
 }
 ```
 
+## Configuring the Kubernetes concurrency limit (number of cloud executors)
+As the *standard* (static) Jenkins executors have been replaced by cloud-based ones, the limit is now configured in a different place.
+The configuration now resides under:
+
+Manage Jenkins -> Manage Nodes and Clouds -> Configure Clouds -> Kubernetes -> Kubernetes Cloud details... -> Concurrency Limit
+
+By default, the limit is set to 100, i.e. 100 parallel jobs at once. This default is in most scenarios way too high and can cause a quick
+Duffy pool depletion (if the spawned pods use the Duffy nodes). So, to be a good netizen, it is recommended to set this number to some
+sensible value (like 15 or 20, etc. - depends on your project), just to take in consideration the other users of the Duffy nodes & Kubernetes cluster.
