@@ -31,11 +31,11 @@ We have a custom label called `cico-workspace` that has python-cicoclient instal
 ```
 node('cico-workspace') {
     stage('get cico node') {
-		node = sh(script: "cico --debug node get -f value -c hostname -c comment", returnStdout: true).trim().tokenize(' ')
-		env.node_hostname = "${node[0]}.ci.centos.org"
-		env.node_ssid = "${node[1]}"
-	}
-	
+        node = sh(script: "cico --debug node get -f value -c hostname -c comment", returnStdout: true).trim().tokenize(' ')
+        env.node_hostname = "${node[0]}.ci.centos.org"
+        env.node_ssid = "${node[1]}"
+    }
+
     stage('tests-example') {
          println("Put your tests here")
          println("example running a test on ${node_hostname} ${node_ssid}")
@@ -47,7 +47,7 @@ node('cico-workspace') {
     }
 
     stage('return cico node') {
-		sh 'cico node done ${node_ssid} > commandResult'
+        sh 'cico node done ${node_ssid} > commandResult'
     }
 }
 ```
