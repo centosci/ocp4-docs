@@ -61,3 +61,15 @@ Manage Jenkins -> Manage Nodes and Clouds -> Configure Clouds -> Kubernetes -> K
 By default, the limit is set to 100, i.e. 100 parallel jobs at once. This default is in most scenarios way too high and can cause a quick
 Duffy pool depletion (if the spawned pods use the Duffy nodes). So, to be a good netizen, it is recommended to set this number to some
 sensible value (like 15 or 20, etc. - depends on your project), just to take in consideration the other users of the Duffy nodes & Kubernetes cluster.
+
+## Configuring SMTP server for email notifications
+If you used job email notifications in the old (legacy) instance, you will probably find out that these don't work out-of-the box in the OCP
+instances. Fortunately, the solution is simple and consists of two steps:
+
+1. In **Manage Jenkins** -> **Configure System** in the **Jenkins Location** section fill in a valid **System Admin e-mail address**. Usually you want to use
+   something like *builder@\<your-Jenkins-instance-address\>* (which is also mentioned in the **Jenkins URL** field above). So, for example,
+   the whole email address can be *builder@my-fabulous-app.apps.ocp.ci.centos.org* (the *builder* part is optional, you can use whatever you want).
+
+2. Again, in **Manage Jenkins** -> **Configure System** in the section **E-mail Notifications** fill in the current SMTP relay for OCP instances, which
+   is **smtp.ci.centos.org**. Then, to check if everything works as it should, check the **Test configuration by sending test e-mail** checkbox, fill in
+   the recipient, and click on **Test configuration**. If the email arrives, you should be all set.
