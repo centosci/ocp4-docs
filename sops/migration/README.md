@@ -73,3 +73,31 @@ instances. Fortunately, the solution is simple and consists of two steps:
 2. Again, in **Manage Jenkins** -> **Configure System** in the section **E-mail Notifications** fill in the current SMTP relay for OCP instances, which
    is **smtp.ci.centos.org**. Then, to check if everything works as it should, check the **Test configuration by sending test e-mail** checkbox, fill in
    the recipient, and click on **Test configuration**. If the email arrives, you should be all set.
+
+## Changing the default Jenkins session timeout
+Since Jenkins makes use of Jetty, it shares its session timeout, which is 30 minutes, causing frequent and annoying logouts to SSO users. To change
+the default timeout, Jenkins provides `--sessionTimeout=` and `--sessionEviction=` options, which in OpenShift can be applied via the `JENKINS_OPTS`
+environment variable.
+
+In:
+
+OCP Console -> Workloads -> DeploymentConfigs -> jenkins -> Environment
+
+add a *Single value* `JENKINS_OPTS` env variable with value `--sessionTimeout=XX --sessionEviction=XX`, where **XX** is the number of **minutes** for
+which the sessions will stay active.
+
+A CLI equivalent using `oc` is:
+
+```
+$ oc set env dc/jenkins JENKINS_OPTS="--sessionTimeout=XX --sessionEviction=XX"
+```
+
+**Note:** setting/editing the env variable will trigger a new Jenkins pod deployment *without* waiting for currently running jobs, so make sure there
+are no running jobs you care about before making the changes.
+
+You can check the current timeout value (in minutes) using a Groovy script (from **Manage Jenkins** -> **Script Console**):
+
+```groovy
+import org.kohsuke.stapler.Stapler;
+Stapler.getCurrentRequest().getSession().getMaxInactiveInterval() / 60
+```
